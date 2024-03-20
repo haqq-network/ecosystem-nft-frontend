@@ -1,8 +1,5 @@
-import NextLink from 'next/link';
 import { Container } from './layout';
-import { DiscordIcon, TwitterIcon } from '../icons/icons';
-import { Logo } from '../logo/logo';
-import { Link } from '../typography/link';
+import { Text } from '../typography/text';
 
 export function Footer() {
   // const currentYear = new Date().getFullYear();
@@ -10,42 +7,15 @@ export function Footer() {
   return (
     <footer className="py-[32px]">
       <Container>
-        <div className="flex flex-col items-start justify-start gap-y-[16px] lg:flex-row lg:gap-x-[80px]">
-          <div>
-            <NextLink href="/">
-              <Logo />
-            </NextLink>
-            {/* <div className="mt-[8px] text-white/20">© {currentYear}</div> */}
-          </div>
-          <div className="flex flex-row gap-x-[12px] lg:gap-x-[60px]">
-            <div className="flex flex-col gap-[8px] lg:flex-row">
-              <div className="flex min-w-[140px] flex-col gap-[8px]">
-                <Link href="#">Collection</Link>
-              </div>
-              <div className="flex min-w-[140px] flex-col gap-[8px]">
-                <Link href="#">NFT’s</Link>
-                <Link href="#">Privacy Policy</Link>
-              </div>
-            </div>
-            {/* social */}
-            <div className="flex flex-col gap-[8px]">
-              <Link
-                href="#"
-                className="inline-flex flex-row items-center gap-[10px]"
-              >
-                <DiscordIcon />
-                <span>Discord</span>
-              </Link>
-              <Link
-                href="#"
-                className="inline-flex flex-row items-center gap-[10px]"
-              >
-                <TwitterIcon />
-                <span>Twitter</span>
-              </Link>
-            </div>
-          </div>
-        </div>
+        <Text>
+          The HAQQ Ecosystem Token, a unique and innovative digital asset,
+          serves as the core driving force of the HAQQ blockchain network, a
+          burgeoning system that is steadily making its mark in the digital
+          world. This token is not just an ordinary asset; it enables the smooth
+          execution of transactions across the network, acting as the vital fuel
+          that powers the operation of smart contracts, which are self-executing
+          contracts with the terms of the agreement directly written into code.
+        </Text>
       </Container>
     </footer>
   );

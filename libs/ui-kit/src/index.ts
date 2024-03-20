@@ -51,3 +51,4 @@ export * from './lib/components/small-tabs/small-tabs';
 
 export * from './lib/components/nft-label/nft-label';
 export * from './lib/components/infinite-scroll/infinite-scroll';
+export * from './lib/components/hero-heading/hero-heading';

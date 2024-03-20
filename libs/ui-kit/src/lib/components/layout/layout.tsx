@@ -10,15 +10,7 @@ export function Container({
   className,
 }: PropsWithChildren<{ className?: string }>) {
   return (
-    <div
-      className={clsx(
-        'mx-auto w-full max-w-[1280px]',
-        'z-0 px-[16px] sm:px-[48px] md:px-[80px] 2xl:px-0',
-        className,
-      )}
-    >
-      {children}
-    </div>
+    <div className={clsx('mx-auto w-full', 'z-0 ', className)}>{children}</div>
   );
 }
 
