@@ -8,6 +8,7 @@ import {
   WalletProvider,
   Web3Provider,
 } from '@haqq-nft/web3-connections';
+import { SharedHeader } from './shared-header/shared-header';
 
 export const metadata: Metadata = {
   title: 'Welcome to NFT marketplace',
@@ -23,7 +24,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
             <AuthProvider>
               <WalletProvider>
                 <SelectWalletModalWrapper>
-                  <Page header={<div />} footer={<Footer />}>
+                  <Page header={<SharedHeader />} footer={<Footer />}>
                     {children}
                   </Page>
                 </SelectWalletModalWrapper>
