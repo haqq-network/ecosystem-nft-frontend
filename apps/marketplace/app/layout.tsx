@@ -2,17 +2,18 @@ import { ReactNode } from 'react';
 import { Metadata } from 'next';
 import './global.scss';
 import { AuthProvider, ConfigProvider } from '@haqq-nft/data-api';
-import { Footer, Page } from '@haqq-nft/ui-kit';
+import { FooterInfo, SharedHeader } from '@haqq-nft/shared-components';
+import { HaqqButton, Page } from '@haqq-nft/ui-kit';
 import {
   SelectWalletModalWrapper,
   WalletProvider,
+  Web3ConnectionBtns,
   Web3Provider,
 } from '@haqq-nft/web3-connections';
-import { SharedHeader } from './shared-header/shared-header';
 
 export const metadata: Metadata = {
-  title: 'Welcome to NFT marketplace',
-  description: '',
+  title: 'Ecosystem NFT',
+  description: 'Mint your first HAQQ NFT today!',
 };
 
 export default function RootLayout({ children }: { children: ReactNode }) {
@@ -24,7 +25,20 @@ export default function RootLayout({ children }: { children: ReactNode }) {
             <AuthProvider>
               <WalletProvider>
                 <SelectWalletModalWrapper>
-                  <Page header={<SharedHeader />} footer={<Footer />}>
+                  <Page
+                    header={
+                      <SharedHeader
+                        tokenButtonSlot={
+                          <HaqqButton variant={2}>
+                            Add token in wallet
+                          </HaqqButton>
+                        }
+                      >
+                        <Web3ConnectionBtns />
+                      </SharedHeader>
+                    }
+                    footer={<FooterInfo />}
+                  >
                     {children}
                   </Page>
                 </SelectWalletModalWrapper>

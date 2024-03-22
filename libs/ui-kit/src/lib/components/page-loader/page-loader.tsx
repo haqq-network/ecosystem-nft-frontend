@@ -12,9 +12,5 @@ export function PageLoading({ className }: { className?: string }) {
 }
 
 export function BlockLoading() {
-  return (
-    <div className="flex w-full flex-auto items-center justify-center">
-      <div className="ml-[12px]">loading...</div>
-    </div>
-  );
+  return <>loading...</>;
 }

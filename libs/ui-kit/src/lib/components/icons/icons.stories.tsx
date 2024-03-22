@@ -21,7 +21,7 @@ import {
   GlobeIcon,
   ISLMIcon,
   ImageRemoveIcon,
-  InfoIcon,
+  InfoIconCircle,
   LinkedInIcon,
   LogoutIcon,
   MagnifierIcon,
@@ -46,6 +46,7 @@ import {
   XMarkLargeIcon,
   XMarkMediumIcon,
   YoutubeIcon,
+  InfoIconSquare,
 } from './icons';
 
 export default {
@@ -79,7 +80,8 @@ export const Icons: StoryFn = () => {
       <GlobeIcon />
       <ISLMIcon />
       <ImageRemoveIcon />
-      <InfoIcon />
+      <InfoIconCircle />
+      <InfoIconSquare />
       <LinkedInIcon />
       <LogoutIcon />
       <MagnifierIcon />

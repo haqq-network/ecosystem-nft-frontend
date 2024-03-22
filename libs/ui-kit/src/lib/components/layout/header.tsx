@@ -1,121 +1,101 @@
 'use client';
-import { Fragment, ReactNode, useCallback, useEffect, useState } from 'react';
+import { Fragment, ReactNode, useCallback, useState } from 'react';
 import clsx from 'clsx';
-import debounce from 'lodash/debounce';
 import Image from 'next/image';
 import Link from 'next/link';
-import { useMediaQuery } from 'react-responsive';
 import ScrollLock from 'react-scrolllock';
-import logoImageData from '../../assets/logo.svg';
-import { BurgerButton } from '../burger-button/burger-button';
+import { BurgerMenu } from './burger-menu';
+import logoImageData from '../../assets/haqq-logo-sign.svg';
+import { HaqqBurgerButton } from '../burger-button/haqq-burger-button';
 
-export function Header({
-  className,
-  children,
-  mobileButtonSlot,
-  isMobileMenuOpen,
-  setMobileMenuOpen,
-}: {
-  className?: string;
-  children: ReactNode;
-  mobileButtonSlot?: ReactNode;
-  isMobileMenuOpen: boolean;
-  setMobileMenuOpen: (isOpen: boolean) => void;
-}) {
-  const [distanceFromTopReached, setDistanceFromTopReached] = useState(false);
+export function Header({ children }: { children?: ReactNode }) {
+  const [isBurgerMenuOpen, setBurgerMenuOpen] = useState(false);
 
-  const isTablet = useMediaQuery({
-    query: `(max-width: 1023px)`,
-  });
+  const handleMenuOpen = useCallback(() => {
+    setBurgerMenuOpen(!isBurgerMenuOpen);
+  }, [isBurgerMenuOpen]);
 
-  const isMenusClosed = !isMobileMenuOpen;
-  const isDarkHeader = distanceFromTopReached;
-
-  useEffect(() => {
-    const updateDistance = () => {
-      if (document.body.scrollTop >= 460) {
-        setDistanceFromTopReached(true);
-      } else {
-        setDistanceFromTopReached(false);
-      }
-    };
-    const debouncedUpdateDistance = debounce(updateDistance, 70);
-    debouncedUpdateDistance();
-    document.body.addEventListener('scroll', debouncedUpdateDistance);
-
-    return () => {
-      document.body.removeEventListener('scroll', debouncedUpdateDistance);
-    };
+  const handleMenuClose = useCallback(() => {
+    setBurgerMenuOpen(false);
   }, []);
 
-  useEffect(() => {
-    if (!isTablet) {
-      setMobileMenuOpen(false);
-    }
-  }, [isTablet, setMobileMenuOpen]);
-
-  const handleCloseClick = useCallback(() => {
-    setMobileMenuOpen(!isMobileMenuOpen);
-  }, [isMobileMenuOpen, setMobileMenuOpen]);
-
   return (
-    <header
-      className={clsx(
-        'relative h-[72px] px-[28px] py-[18px]',
-        'bg-main-black h-[63px] w-full border-b border-t border-[#464647] sm:h-[72px]',
-        'sticky top-0 z-50',
-        isMobileMenuOpen || isDarkHeader
-          ? '!bg-main-black'
-          : 'bg-header-background',
-        className,
-      )}
-      style={{
-        backdropFilter: distanceFromTopReached ? 'unset' : 'blur(30px)',
-        backgroundColor: distanceFromTopReached ? '#131313' : 'unset',
-      }}
-    >
-      <div className="relative z-50 mx-auto flex h-full w-full flex-row items-center pr-[16px] sm:pr-[64px] lg:pr-[80px]">
-        <div className="flex h-full w-[48px] flex-none items-center justify-center border-r border-[#464647] sm:w-[64px] lg:w-[80px]">
-          <div className="relative h-[26px] w-[26px] sm:h-[32px] sm:w-[32px]">
-            <Link href="/">
-              <Image src={logoImageData} alt="HAQQ" fill />
-            </Link>
+    <Fragment>
+      <header
+        className={clsx(
+          'bg-haqq-black h-[63px] w-full border-b border-t border-[#464647] sm:h-[72px]',
+          'sticky top-0 z-50',
+        )}
+      >
+        <div className="relative z-50 mx-auto flex h-full w-full flex-row items-center pr-[16px] sm:pr-[64px] lg:pr-[80px]">
+          <div className="flex h-full w-[48px] flex-none items-center justify-center border-r border-[#464647] sm:w-[64px] lg:w-[80px]">
+            <div className="relative h-[26px] w-[26px] sm:h-[32px] sm:w-[32px]">
+              <Link href="/">
+                <Image src={logoImageData} alt="HAQQ" fill />
+              </Link>
+            </div>
           </div>
-        </div>
-        <div className="ml-[12px] flex flex-row items-center space-x-[15px] sm:ml-[20px] lg:ml-[32px]">
-          <div>
+          <div className="flex flex-row items-center gap-x-[8px] sm:ml-[20px] lg:ml-[32px]">
             <Link
               href="/"
               className="font-clash text-[20px] font-medium leading-none sm:text-[24px]"
             >
               HAQQ
             </Link>
+            <div className="text-haqq-black w-fit rounded-[30px] bg-white px-[8px] py-[3px] text-center text-[12px] font-[700] uppercase leading-[15px]">
+              Token
+            </div>
+          </div>
+
+          <div className="flex-1" />
+          <div className="lg:block">{children}</div>
+
+          <div className="block pl-[8px] leading-[0] lg:hidden">
+            <HaqqBurgerButton
+              isOpen={isBurgerMenuOpen}
+              onClick={handleMenuOpen}
+              className="h-[24px] w-[24px] sm:h-[30px] sm:w-[30px]"
+            />
           </div>
         </div>
+      </header>
+      <BurgerMenuComponent
+        isOpen={isBurgerMenuOpen}
+        onClose={handleMenuClose}
+      />
+    </Fragment>
+  );
+}
 
-        <div className="flex-1" />
+function BurgerMenuComponent({
+  isOpen,
+  onClose,
+}: {
+  isOpen: boolean;
+  onClose: () => void;
+}) {
+  return (
+    <div className="lg:hidden">
+      <ScrollLock isActive={isOpen} />
 
-        <div className="lg:flex lg:flex-row lg:gap-[60px]">
-          <div className="flex flex-row gap-[20px]">{children}</div>
-          <div className="flex flex-row items-center gap-x-[20px] lg:hidden">
-            <BurgerButton isOpen={!isMenusClosed} onClick={handleCloseClick} />
-          </div>
-          {isMobileMenuOpen && (
-            <Fragment>
-              <ScrollLock isActive />
-
-              <div
-                className={clsx(
-                  'bg-main-black fixed right-0 z-40 w-full transform-gpu lg:hidden',
-                  'top-[61px] h-[calc(100vh-61px)] sm:top-[71px] sm:h-[calc(100vh-71px)]',
-                )}
-              >
-                <div className=" px-[16px]">{mobileButtonSlot}</div>
-              </div>
-            </Fragment>
-          )}
-        </div>
+      <div
+        className={clsx(
+          'fixed right-0 top-[62px] z-[45] h-[calc(100vh-62px)] w-full sm:top-[72px] sm:h-[calc(100vh-72px)] sm:w-[468px]',
+          'transform-gpu transition-transform duration-200 will-change-transform',
+          isOpen
+            ? 'translate-y-[0px] ease-in-out sm:translate-x-[0px]'
+            : 'translate-y-[100%] ease-out sm:translate-x-[100%] sm:translate-y-[0%]',
+        )}
+      >
+        <BurgerMenu onClose={onClose} />
       </div>
-    </header>
+
+      {isOpen && (
+        <div
+          onClick={onClose}
+          className="fixed right-0 top-[0] z-40 h-full w-full bg-black/80"
+        />
+      )}
+    </div>
   );
 }

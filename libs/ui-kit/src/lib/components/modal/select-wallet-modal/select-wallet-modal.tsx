@@ -41,7 +41,6 @@ export function SelectWalletModal({
               return (
                 <Button
                   className="w-full text-[14px] uppercase"
-                  variant="green"
                   key={connector.id}
                   onClick={() => {
                     onConnectClick(connector.id);

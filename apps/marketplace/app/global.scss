@@ -1,5 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Inconsolata:wdth,wght@100,500;100,600;100,700;100,800;112.5,500;112.5,600;112.5,700;112.5,800&display=swap');
 
+@import '../styles/fonts.css';
+
 @tailwind components;
 @tailwind base;
 @tailwind utilities;
@@ -29,6 +31,8 @@
   --font-family-base: var(--font-apple), var(--font-fallback), var(--font-emoji);
 
   --font-inconsolata: 'Inconsolata', var(--font-family-base);
+  --font-clash: 'Clash Display';
+  --font-guise: 'HK Guise';
 }
 
 html {
@@ -36,7 +40,7 @@ html {
 }
 
 body {
-  @apply bg-main-black font-inconsolata h-full overflow-auto text-white antialiased will-change-auto;
+  @apply bg-haqq-black font-guise h-full overflow-auto text-white antialiased will-change-auto;
 }
 
 ::-webkit-scrollbar {

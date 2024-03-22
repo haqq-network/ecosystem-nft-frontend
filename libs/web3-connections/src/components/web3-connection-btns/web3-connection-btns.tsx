@@ -5,17 +5,15 @@ import clsx from 'clsx';
 import { useMediaQuery } from 'react-responsive';
 import { useBalance, useChainId, useConnect as useWagmiConnect } from 'wagmi';
 import { useAuth } from '@haqq-nft/data-api';
-import { Button, LogoutIcon, WrongNetworkModal } from '@haqq-nft/ui-kit';
+import { HaqqButton, LogoutIcon, WrongNetworkModal } from '@haqq-nft/ui-kit';
 import { formatNumber, shortenString } from '@haqq-nft/utils';
 import { useCurrentAddress } from '../../hooks/useAddress';
 import { useWallet } from '../../providers';
 
 export const Web3ConnectionBtns = ({
   className = '',
-  setMobileMenuOpen,
 }: {
   className?: string;
-  setMobileMenuOpen: (isOpen: boolean) => void;
 }) => {
   const { openSelectWallet } = useWallet();
 
@@ -37,29 +35,14 @@ export const Web3ConnectionBtns = ({
 
   return !targetAddress ? (
     <div className={clsx('flex flex-row gap-[16px]', className)}>
-      <Button
-        onClick={handleEvmConnect}
-        variant="green"
-        className="min-w-[170px] uppercase"
-      >
-        Connect wallet
-      </Button>
+      <HaqqButton onClick={handleEvmConnect}>Connect wallet</HaqqButton>
     </div>
   ) : (
-    <Web2LoginBlock
-      className={className}
-      setMobileMenuOpen={setMobileMenuOpen}
-    />
+    <Web2LoginBlock className={className} />
   );
 };
 
-const Web2LoginBlock = ({
-  className,
-  setMobileMenuOpen,
-}: {
-  className: string;
-  setMobileMenuOpen: (isOpen: boolean) => void;
-}) => {
+const Web2LoginBlock = ({ className }: { className: string }) => {
   const { ethAddress: targetAddress } = useCurrentAddress();
 
   const {
@@ -100,28 +83,27 @@ const Web2LoginBlock = ({
     <div className={clsx('flex flex-row items-center', className)}>
       {!isTablet ? (
         <div className="flex flex-row">
-          <div className="border-default-green text-default-green mr-[-8px] rounded-l-[10px] border border-r-0 py-[12px] pl-[12px] pr-[20px] text-[14px] font-[800] leading-[14px]">
+          <div className="mr-[-8px] rounded-l-[10px] border border-r-0 py-[12px] pl-[12px] pr-[20px] text-[14px] font-[800] leading-[14px]">
             {balance?.value} {balance?.symbol}
           </div>
 
-          <Button
-            variant="green"
-            className="inline-flex flex-row items-center gap-[2px] !px-[12px] !pl-[16px] !pr-[8px] uppercase"
+          <HaqqButton
             onClick={disconnectEvm}
+            className="flex items-center gap-[12px]"
           >
             <LogoutIcon /> Disconnect
-          </Button>
+          </HaqqButton>
         </div>
       ) : (
         <div className="flex flex-col">
-          <div className="flex flex-row">
-            <div className="border-default-green text-default-green mr-[-8px] whitespace-nowrap rounded-l-[10px] border border-r-0 py-[12px] pl-[12px] pr-[20px] text-[14px] font-[800] leading-[14px]">
+          <div className="flex flex-row items-center">
+            <div className="font-clash mr-[-8px] whitespace-nowrap rounded-l-[10px] border border-r-0 py-[12px] pl-[12px] pr-[20px] text-[14px] font-[800] leading-[14px]">
               {balance?.value} {balance?.symbol}
             </div>
 
-            <Button variant="green" className="!px-[12px] uppercase">
+            <HaqqButton className="font-guise !px-[12px] !py-[9px] uppercase">
               <span>{shortenString(targetAddress, 3)}</span>
-            </Button>
+            </HaqqButton>
           </div>
 
           <div className="mt-[12px] flex flex-col">
@@ -131,7 +113,7 @@ const Web2LoginBlock = ({
                 signOut();
               }}
               className={clsx(
-                'inline-flex w-[100%] cursor-pointer flex-row items-center gap-[10px] py-[8px] text-[18px] font-[600] leading-[26px]',
+                'flex w-[100%] cursor-pointer flex-row items-center gap-[10px] py-[8px] text-[18px] font-[600] leading-[26px]',
                 'hover:text-white/50',
                 'transition-colors duration-150 ease-in-out',
               )}

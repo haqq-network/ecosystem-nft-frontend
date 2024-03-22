@@ -6,6 +6,7 @@ type NumberOrString<T> = T extends 'number' ? number : string;
 export interface AdditionalInputProps<T extends InputType> {
   inputClassName?: string;
   label?: string;
+  labelRightSlot?: ReactNode;
   error?: string;
   leftSlot?: ReactNode;
   rightSlot?: ReactNode;
@@ -33,6 +34,7 @@ export const Input = forwardRef(
       className,
       inputClassName,
       label,
+      labelRightSlot,
       type,
       id,
       placeholder,
@@ -80,16 +82,17 @@ export const Input = forwardRef(
           <label
             htmlFor={id}
             className={clsx(
-              'text-[16px] font-[500] leading-[24px]',
+              'font-guise flex items-center gap-[7px] text-[13px] font-medium leading-[24px]',
               disabled && 'cursor-not-allowed',
             )}
           >
             {label}
+            {labelRightSlot && labelRightSlot}
           </label>
         )}
         <div
           className={clsx(
-            'flex w-full flex-row items-center gap-x-[6px] rounded-[10px] bg-white/[8%] px-[14px] py-[8px] font-[600] transition-colors duration-150 focus-within:bg-white/[24%]',
+            'flex w-full flex-row items-center gap-x-[6px] rounded-[6px] bg-white/[8%] px-[14px] py-[8px] font-[600] transition-colors duration-150 focus-within:bg-white/[24%]',
             error && '!bg-[#360C0E]',
           )}
         >
@@ -107,15 +110,23 @@ export const Input = forwardRef(
             ref={ref}
             autoFocus={autoFocus}
             className={clsx(
-              'peer order-2 w-full flex-1 placeholder-white/50 outline-none transition-colors duration-150',
+              'font-guise peer order-2 w-full flex-1 text-[13px] font-medium placeholder-white/25 outline-none transition-colors duration-150 placeholder:font-medium',
               error ? 'bg-[#360C0E] text-[#FF5454]' : 'bg-transparent',
               disabled && 'cursor-not-allowed',
               inputClassName,
             )}
             {...rest}
           />
-          {leftSlot && <div className="order-1">{leftSlot}</div>}
-          {rightSlot && <div className="order-3">{rightSlot}</div>}
+          {leftSlot && (
+            <div className="font-guise order-1 text-[13px] font-medium">
+              {leftSlot}
+            </div>
+          )}
+          {rightSlot && (
+            <div className="font-guise order-3 text-[13px] font-medium">
+              {rightSlot}
+            </div>
+          )}
         </div>
         {error && (
           <div className="text-[14px] leading-[20px] text-[#FF5454]">

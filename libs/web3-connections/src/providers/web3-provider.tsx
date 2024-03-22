@@ -1,32 +1,12 @@
 'use client';
 
 import { createContext, PropsWithChildren, useContext, useMemo } from 'react';
-import { Chain, haqqMainnet } from '@wagmi/chains';
+import { Chain, haqqMainnet, haqqTestedge2 } from '@wagmi/chains';
 import { createConfig, CreateConnectorFn, http, WagmiProvider } from 'wagmi';
 import { walletConnect } from 'wagmi/connectors';
 import { ReactQueryProvider } from './react-query-provider';
 
-export const haqqLocalnet: Chain = {
-  id: 121799,
-  name: 'HAQQ Localnet',
-  network: 'haqq-localnet-1',
-  nativeCurrency: {
-    decimals: 18,
-    name: 'Islamic Coin',
-    symbol: 'ISLMT',
-  },
-  rpcUrls: {
-    default: {
-      http: ['http://127.0.0.1:8545'],
-    },
-    public: {
-      http: ['http://127.0.0.1:8545'],
-    },
-  },
-  testnet: true,
-};
-
-export const SUPPORTED_CHAINS = [haqqMainnet, haqqLocalnet];
+export const SUPPORTED_CHAINS = [haqqMainnet, haqqTestedge2];
 const SupportedChainsContext = createContext<Chain[]>(SUPPORTED_CHAINS);
 
 export const isAllowedChain = (chainId: number) => {
@@ -72,10 +52,10 @@ export function Web3Provider({
 
   const config = useMemo(() => {
     return createConfig({
-      chains: [haqqMainnet, haqqLocalnet],
+      chains: [haqqMainnet, haqqTestedge2],
       transports: {
         [haqqMainnet.id]: http(),
-        [haqqLocalnet.id]: http(),
+        [haqqTestedge2.id]: http(),
       },
       connectors,
     });
