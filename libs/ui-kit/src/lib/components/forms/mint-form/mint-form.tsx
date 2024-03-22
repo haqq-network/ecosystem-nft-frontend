@@ -94,6 +94,7 @@ const MintBlock = ({
       </div>
       <Button
         type="submit"
+        isLoading={isPending}
         className={`!font-clash rounded-[6px] !bg-white !font-medium !text-[#0D0D0E] ${disabled ? 'cursor-not-allowed opacity-50' : 'cursor-pointer opacity-100'}`}
       >
         Mint
@@ -136,7 +137,7 @@ export function MintForm({
     >
       <HaqqHeading>Mint form</HaqqHeading>
 
-      <form className="flex flex-col gap-y-[20px]">
+      <div className="flex flex-col gap-y-[20px]">
         <div className="flex w-full flex-col items-baseline gap-[16px] sm:flex-row">
           <HookedFormInput
             id="tokenAmount"
@@ -172,7 +173,7 @@ export function MintForm({
           isPending={isPending}
           estimated={estimated}
         />
-      </form>
+      </div>
     </form>
   );
 }

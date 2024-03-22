@@ -13,9 +13,7 @@ export function useMintAction() {
 
   const action = useCallback(
     async (amountRequested: number, value: bigint) => {
-      console.log('amountRequested', amountRequested, value?.toString());
-
-      await walletAction({
+      return await walletAction({
         address: mintAddress,
         abi,
         functionName: 'mint',
