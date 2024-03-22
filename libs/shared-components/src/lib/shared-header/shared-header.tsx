@@ -1,25 +1,16 @@
 'use client';
-import {
-  Fragment,
-  PropsWithChildren,
-  ReactNode,
-  useCallback,
-  useState,
-} from 'react';
+
+import { Fragment, PropsWithChildren, useCallback, useState } from 'react';
 import clsx from 'clsx';
 import Image from 'next/image';
 import Link from 'next/link';
 import ScrollLock from 'react-scrolllock';
 import { HaqqBurgerButton } from '@haqq-nft/ui-kit';
 import logoImageData from '../../assets/haqq-logo-sign.svg';
+import { AddTokenBtn } from '../add-token-btn/add-token-btn';
 import { BurgerMenu } from '../burger-menu/burger-menu';
 
-export function SharedHeader({
-  children,
-  tokenButtonSlot,
-}: PropsWithChildren<{
-  tokenButtonSlot?: ReactNode;
-}>) {
+export function SharedHeader({ children }: PropsWithChildren) {
   const [isBurgerMenuOpen, setBurgerMenuOpen] = useState(false);
 
   const handleMenuOpen = useCallback(() => {
@@ -61,9 +52,10 @@ export function SharedHeader({
 
           <div className="flex-1" />
 
-          {tokenButtonSlot && (
-            <div className="mr-[24px] hidden lg:block">{tokenButtonSlot}</div>
-          )}
+          <div className="mr-[24px] hidden lg:block">
+            <AddTokenBtn />
+          </div>
+
           <div className="hidden lg:block">{children}</div>
 
           <div className="block pl-[8px] leading-[0] lg:hidden">

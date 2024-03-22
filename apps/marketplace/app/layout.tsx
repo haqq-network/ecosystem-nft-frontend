@@ -16,7 +16,6 @@ export const metadata: Metadata = {
   description: 'Mint your first HAQQ NFT today!',
 };
 
-// 0x4305afEc41f595000aaFa4bE5fa6071Ffc822Fc5 EST
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html lang="en">
@@ -28,13 +27,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
                 <SelectWalletModalWrapper>
                   <Page
                     header={
-                      <SharedHeader
-                        tokenButtonSlot={
-                          <HaqqButton variant={2}>
-                            Add token in wallet
-                          </HaqqButton>
-                        }
-                      >
+                      <SharedHeader>
                         <Web3ConnectionBtns />
                       </SharedHeader>
                     }
