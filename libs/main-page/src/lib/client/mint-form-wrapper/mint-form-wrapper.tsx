@@ -11,11 +11,15 @@ export const schema = yup
   .object({
     gap: yup
       .number()
+      .typeError('Gap must be a number')
+      .defined('Gap is required')
       .required("Gap can't be empty")
       .max(99, 'Gap should be less than 100')
       .min(0, 'Gap should be more or equal 0'),
     tokenAmount: yup
       .number()
+      .typeError('Token amount must be a number')
+      .defined('Token amount is required')
       .required("Token amount can't be empty")
       .min(1, 'Token amount should be more than 0'),
   })
