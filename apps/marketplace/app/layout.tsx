@@ -11,9 +11,25 @@ import {
   Web3Provider,
 } from '@haqq-nft/web3-connections';
 
+const DOMAIN = 'https://ecosystem-nft-frontend.vercel.app';
+
 export const metadata: Metadata = {
   title: 'Ecosystem Token',
   description: 'Buy your first Ecosystem Token with ISLM',
+  openGraph: {
+    title: 'Ecosystem Token',
+    description: 'Buy your first Ecosystem Token with ISLM',
+    type: 'website',
+    url: DOMAIN,
+    images: `${DOMAIN}/shared-bg.png`,
+    siteName: 'Ecosystem Token',
+  },
+  twitter: {
+    site: DOMAIN,
+    images: `${DOMAIN}/shared-bg.png`,
+    title: 'Ecosystem Token',
+    description: 'Buy your first Ecosystem Token with ISLM',
+  },
 };
 
 export default function RootLayout({ children }: { children: ReactNode }) {
