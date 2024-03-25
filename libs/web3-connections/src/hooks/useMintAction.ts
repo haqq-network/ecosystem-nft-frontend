@@ -1,6 +1,7 @@
 'use client';
 
 import { useCallback } from 'react';
+import { parseEther } from 'viem';
 import { useConfig } from '@haqq-nft/data-api';
 import { useTxResolver } from '@haqq-nft/types';
 import abi from '../abi/ecosystem-mint-abi.json';
@@ -17,7 +18,7 @@ export function useMintAction() {
         address: mintAddress,
         abi,
         functionName: 'mint',
-        args: [BigInt(amountRequested)],
+        args: [parseEther(amountRequested.toString())],
         value: value,
       });
     },
