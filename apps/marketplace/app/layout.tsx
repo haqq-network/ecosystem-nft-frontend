@@ -3,7 +3,7 @@ import { Metadata } from 'next';
 import './global.scss';
 import { AuthProvider, ConfigProvider } from '@haqq-nft/data-api';
 import { FooterInfo, SharedHeader } from '@haqq-nft/shared-components';
-import { HaqqButton, Page } from '@haqq-nft/ui-kit';
+import { Page } from '@haqq-nft/ui-kit';
 import {
   SelectWalletModalWrapper,
   WalletProvider,
@@ -12,8 +12,8 @@ import {
 } from '@haqq-nft/web3-connections';
 
 export const metadata: Metadata = {
-  title: 'Ecosystem NFT',
-  description: 'Mint your first HAQQ NFT today!',
+  title: 'Ecosystem Token',
+  description: 'Buy your first Ecosystem Token with ISLM',
 };
 
 export default function RootLayout({ children }: { children: ReactNode }) {
