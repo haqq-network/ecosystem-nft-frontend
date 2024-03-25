@@ -29,6 +29,7 @@ export const AddTokenBtn = ({ className }: { className?: string }) => {
             : TESTNET_TOKEN_ADDRESS,
         symbol: 'EST',
         decimals: 18,
+        image: window.location.origin + '/assets/tokens/est.svg',
       },
     });
   }, [chainId, walletClient]);
