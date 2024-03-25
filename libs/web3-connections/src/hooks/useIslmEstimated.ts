@@ -7,7 +7,7 @@ import { useConfig } from '@haqq-nft/data-api';
 import abi from '../abi/ecosystem-mint-abi.json';
 
 const convertWithGap = (gap: number, value: bigint) => {
-  return (value * BigInt(gap + 100)) / BigInt(100);
+  return (value * BigInt(+gap + 100)) / BigInt(100);
 };
 
 export function useIslmEstimated(amount: number, gap = 0) {
