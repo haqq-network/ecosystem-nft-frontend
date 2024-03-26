@@ -34,7 +34,7 @@ const MintFormData = () => {
     resolver: yupResolver(schema),
     values: {
       gap: 10,
-      tokenAmount: 1000,
+      tokenAmount: undefined,
     },
   });
 
@@ -48,7 +48,7 @@ const MintFormData = () => {
 
   const handleMint = useCallback(
     async (data: IFields) => {
-      action(data.tokenAmount, estimated);
+      data.tokenAmount && action(data.tokenAmount, estimated);
     },
     [action, estimated],
   );

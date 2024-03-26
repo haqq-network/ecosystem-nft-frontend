@@ -10,7 +10,7 @@ const convertWithGap = (gap: number, value: bigint) => {
   return (value * BigInt(+gap + 100)) / BigInt(100);
 };
 
-export function useIslmEstimated(amount: number, gap = 0) {
+export function useIslmEstimated(amount: number | undefined = 0, gap = 0) {
   const { mintAddress } = useConfig();
 
   const result = useReadContract({

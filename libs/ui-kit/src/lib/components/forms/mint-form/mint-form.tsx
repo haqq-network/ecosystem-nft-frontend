@@ -21,7 +21,7 @@ export type FormError = {
 
 export interface IFields {
   gap: number;
-  tokenAmount: number;
+  tokenAmount?: number;
 }
 
 const validGapTooltipText = `The price shift that you buy back, the value of the token changes with each issued token. Since transactions for mint tokens can be sent by several users at once, the first one will be executed according to the original one, and the price for subsequent ones will be increased due to the release of the first one, and GAP allows you to specify which delta you are ready to accept. \nMinimum 0% 0,1% ..... 99% really in the range between 0 - 0.1% - 3% -5% The difference between the actual price and the GAP price will be returned to the user. If the price becomes higher than the GAP, the transaction will not be executed.`;

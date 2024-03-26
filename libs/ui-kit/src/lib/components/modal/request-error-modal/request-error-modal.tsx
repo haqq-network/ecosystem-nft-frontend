@@ -23,7 +23,7 @@ export function RequestErrorModal({
             <Button onClick={onClose} className="w-1/2">
               Close
             </Button>
-            <Button onClick={onTryAgainClick} variant="green" className="w-1/2">
+            <Button onClick={onTryAgainClick} className="w-1/2">
               Try again
             </Button>
           </div>
