@@ -33,11 +33,7 @@ export function WrongNetworkModal({
             </Text>
 
             <div className="mt-[24px] flex w-full flex-col  gap-[15px]">
-              <Button
-                variant="green"
-                onClick={onChangeNetwork}
-                className="w-full uppercase"
-              >
+              <Button onClick={onChangeNetwork} className="w-full uppercase">
                 Change network
               </Button>
               <Button
