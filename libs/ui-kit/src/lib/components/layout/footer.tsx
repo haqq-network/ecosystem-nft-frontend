@@ -8,18 +8,37 @@ import { Text } from '../typography/text';
 
 interface IProps {
   totalSupply: bigint;
-  price: bigint;
+  priceChange7d: bigint;
+  priceChange30d: bigint;
   loading: boolean;
   balance?: bigint;
 }
 
-export function Footer({ totalSupply, price, loading, balance }: IProps) {
+export function Footer({
+  totalSupply,
+  priceChange7d,
+  priceChange30d,
+  loading,
+  balance,
+}: IProps) {
   return (
     <footer className="border-haqq-border relative border-t px-[16px] py-[68px] md:px-[64px] lg:px-[80px] lg:py-[100px]">
       <Container>
         <div className="flex flex-col gap-y-[24px] lg:gap-y-[32px]">
           <HaqqHeading>About</HaqqHeading>
           <div className="flex flex-col gap-[16px] lg:flex-row lg:gap-[36px]">
+            <FooterDataBadge
+              value={formatEthDecimal(priceChange7d, 2, 0)}
+              type="7dPrice"
+              loading={loading}
+            />
+
+            <FooterDataBadge
+              value={formatEthDecimal(priceChange30d, 2, 0)}
+              type="30dPrice"
+              loading={loading}
+            />
+
             <FooterDataBadge
               value={formatEthDecimal(totalSupply)}
               type="tokensCount"
@@ -69,11 +88,21 @@ function FooterDataBadge({
   loading: boolean;
   type: '7dPrice' | '30dPrice' | 'tokensCount' | 'ISLMFunds';
 }) {
-  const isTextGreen = type === '7dPrice' || type === '30dPrice';
+  const isTextGreen =
+    (type === '7dPrice' || type === '30dPrice') && !value?.includes('-');
 
+  const isTextRed =
+    (type === '7dPrice' || type === '30dPrice') && value?.includes('-');
+
+  console.log('value,', value);
   return (
     <div className="flex w-fit flex-col gap-y-[2px] font-[500]">
-      <HaqqHeading className={clsx(isTextGreen && 'text-haqq-green')}>
+      <HaqqHeading
+        className={clsx(
+          isTextGreen && 'text-haqq-green',
+          isTextRed && 'text-main-red',
+        )}
+      >
         {loading ? <BlockLoading /> : isTextGreen ? `+${value}%` : value}
       </HaqqHeading>
 
