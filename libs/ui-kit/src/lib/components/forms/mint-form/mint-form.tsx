@@ -143,7 +143,7 @@ export function MintForm({
             id="tokenAmount"
             name="tokenAmount"
             className="w-full sm:w-[70%]"
-            label="Amount of token"
+            label="Mint amount"
             placeholder="From 0 to 10 000 000 000"
             type="number"
             required
