@@ -28,8 +28,8 @@ export function WrongNetworkModal({
               size="large"
               weight="semibold"
             >
-              You connected to Unknown network but to prevent mistakes you must
-              be connected to HAQQ network
+              You connected to not allowed network but to prevent mistakes you
+              must be connected to HAQQ network
             </Text>
 
             <div className="mt-[24px] flex w-full flex-col  gap-[15px]">

@@ -94,7 +94,6 @@ function FooterDataBadge({
   const isTextRed =
     (type === '7dPrice' || type === '30dPrice') && value?.includes('-');
 
-  console.log('value,', value);
   return (
     <div className="flex w-fit flex-col gap-y-[2px] font-[500]">
       <HaqqHeading

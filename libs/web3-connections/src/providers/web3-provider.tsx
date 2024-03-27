@@ -1,12 +1,12 @@
 'use client';
 
 import { createContext, PropsWithChildren, useContext, useMemo } from 'react';
-import { Chain, haqqMainnet, haqqTestedge2 } from '@wagmi/chains';
+import { Chain, haqqTestedge2 } from '@wagmi/chains';
 import { createConfig, CreateConnectorFn, http, WagmiProvider } from 'wagmi';
 import { walletConnect } from 'wagmi/connectors';
 import { ReactQueryProvider } from './react-query-provider';
 
-export const SUPPORTED_CHAINS = [haqqMainnet, haqqTestedge2];
+export const SUPPORTED_CHAINS = [haqqTestedge2];
 const SupportedChainsContext = createContext<Chain[]>(SUPPORTED_CHAINS);
 
 export const isAllowedChain = (chainId: number) => {
@@ -52,9 +52,8 @@ export function Web3Provider({
 
   const config = useMemo(() => {
     return createConfig({
-      chains: [haqqMainnet, haqqTestedge2],
+      chains: [haqqTestedge2],
       transports: {
-        [haqqMainnet.id]: http(),
         [haqqTestedge2.id]: http(),
       },
       connectors,

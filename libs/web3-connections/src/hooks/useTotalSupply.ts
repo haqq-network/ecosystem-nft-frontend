@@ -14,6 +14,8 @@ export function useTotalSupply() {
     functionName: 'totalSupply',
   });
 
+  console.log('result', result.data, result.data?.toString());
+
   return useMemo(() => {
     return {
       value: (result.data as bigint) || BigInt(0),
