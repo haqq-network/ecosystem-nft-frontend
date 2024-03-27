@@ -37,17 +37,24 @@ export const Chart = () => {
   const { data, isLoading } = useChartData();
 
   const chartData = useMemo(() => {
-    if (!data) {
+    if (!data || loading) {
       return [];
     }
 
-    return data?.historical.map((item) => {
+    const items = data?.historical.map((item) => {
       return {
         date: new Date(item[0]).getTime(),
         price: item[1],
       };
     });
-  }, [data]);
+
+    items.push({
+      date: NOW.getTime(),
+      price: +formatEthDecimal(price),
+    });
+
+    return items;
+  }, [data, price, loading]);
 
   const maxPrice = useMemo(() => {
     return Math.max(
@@ -98,7 +105,11 @@ export const Chart = () => {
               fontWeight={500}
               tick={tickProps}
               tickLine={false}
-              tickFormatter={(val) => {
+              tickFormatter={(val, index) => {
+                if (index === chartData.length - 1) {
+                  return 'Now';
+                }
+
                 const date = new Date(val);
                 return `${numberWithZero(date.getDate())}.${numberWithZero(date.getMonth())}`;
               }}
