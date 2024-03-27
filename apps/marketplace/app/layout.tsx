@@ -61,7 +61,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
   );
 }
 
-const WALLET_CONNECT_PROJECT_ID = '5cb33e12aa319209d1f9bd1af4b8a4b0';
+const WALLET_CONNECT_PROJECT_ID = '9fb33c647eb8257e76a5a5025a35b14d';
 
 const Web3ProviderWrapper = ({ children }: { children: ReactNode }) => {
   return (
